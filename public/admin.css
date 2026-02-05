@@ -1,3 +1,5 @@
+/* ===== NOTEPAD DARK THEME (ADMIN) ===== */
+
 * {
   box-sizing: border-box;
   font-family: Consolas, "Courier New", monospace;
@@ -5,74 +7,91 @@
 
 body {
   margin: 0;
-  background: #121212;
-  color: #eaeaea;
+  background: #1e1e1e;      /* notepad dark bg */
+  color: #d4d4d4;           /* soft text */
 }
 
-/* Top Bar */
+/* ===== TOP BAR ===== */
 .topbar {
   height: 40px;
-  border-bottom: 1px solid #333;
+  background: #2d2d30;      /* notepad title bar */
+  border-bottom: 1px solid #3f3f46;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 0 12px;
   font-size: 14px;
-  background: #1e1e1e;
+}
+
+.topbar span {
+  color: #ffffff;
 }
 
 .logout {
-  background: #1e1e1e;
-  color: #eaeaea;
-  border: 1px solid #333;
+  background: transparent;
+  color: #d4d4d4;
+  border: 1px solid #3f3f46;
   padding: 4px 10px;
   cursor: pointer;
 }
 
-/* Main Container */
+.logout:hover {
+  background: #3f3f46;
+}
+
+/* ===== MAIN CONTAINER ===== */
 .container {
   padding: 20px;
 }
 
-/* Stats */
+/* ===== STATS BOX ===== */
 .stats {
-  background: #1e1e1e;
-  border: 1px solid #333;
-  padding: 15px;
-  width: 250px;
+  background: #252526;      /* editor panel bg */
+  border: 1px solid #3f3f46;
+  padding: 16px;
+  width: 260px;
   margin-bottom: 20px;
 }
 
 .stats h3 {
-  margin: 0 0 10px 0;
-  font-size: 14px;
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  color: #9cdcfe;           /* notepad accent */
 }
 
 .stats p {
-  font-size: 24px;
+  font-size: 26px;
   margin: 0;
+  color: #ffffff;
 }
 
-/* Table */
+/* ===== TABLE ===== */
 .table-box h3 {
-  font-size: 14px;
+  font-size: 13px;
   margin-bottom: 10px;
+  color: #9cdcfe;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  background: #1e1e1e;
+  background: #252526;
 }
 
 th, td {
-  border: 1px solid #333;
-  padding: 8px;
+  border: 1px solid #3f3f46;
+  padding: 8px 10px;
   font-size: 13px;
   text-align: left;
-  color: #eaeaea;
+  color: #d4d4d4;
 }
 
 th {
-  background: #2a2a2a;
+  background: #2d2d30;
+  color: #ffffff;
+}
+
+/* ===== ROW HOVER (nice touch) ===== */
+tbody tr:hover {
+  background: #313135;
 }

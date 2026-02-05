@@ -88,35 +88,32 @@ app.post("/login", async (req, res) => {
     const ok = await bcrypt.compare(password, user.password);
     if (!ok) return res.send("Wrong password");
 
-    req.session.regenerate(err => {
-      if (err) return res.send("Session error");
+    // ✅ SESSION SET (SIMPLE & SAFE)
+    req.session.userId = user._id.toString();
+    req.session.username = user.username;
+    req.session.isAdmin = user.isAdmin === true;
 
-      req.session.userId = user._id;
-      req.session.username = user.username;
-      req.session.isAdmin = user.isAdmin || false;
+    console.log("LOGIN SESSION:", req.session);
 
-      if (user.isAdmin) {
-        res.redirect("/admin.html");
-      } else {
-        res.redirect("/notepad.html");
-      }
-    });
+    if (req.session.isAdmin) {
+      res.redirect("/admin.html");
+    } else {
+      res.redirect("/notepad.html");
+    }
   } catch (err) {
     console.error(err);
     res.status(500).send("Login error");
   }
 });
 
-app.get("/logout", (req, res) => {
-  req.session.destroy(() => {
-    res.clearCookie("cloudpad.sid");
-    res.redirect("/login.html");
-  });
-});
 
 /* ================= USER INFO ================= */
 app.get("/me", (req, res) => {
   res.json({ username: req.session.username || "User" });
+});
+
+app.get("/debug-session", (req, res) => {
+  res.json(req.session);
 });
 
 /* ================= NOTES ================= */
@@ -178,5 +175,14 @@ async function startServer() {
     console.error("Mongo connection failed:", err.message);
   }
 }
+
+app.get("/hash-admin", async (req, res) => {
+  const hash = await bcrypt.hash("admin123", 10);
+  await User.updateOne(
+    { username: "admin" },
+    { $set: { password: hash } }
+  );
+  res.send("Admin password hashed");
+});
 
 startServer();

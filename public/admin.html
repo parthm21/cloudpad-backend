@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>CloudPad Admin</title>
-  <link rel="stylesheet" href="admin.css">
+
+  <!-- IMPORTANT: root path -->
+  <link rel="stylesheet" href="/admin.css">
 </head>
 <body>
 
   <!-- Top Bar -->
   <div class="topbar">
     <span>CloudPad — Admin</span>
-    <button class="logout">Logout</button>
+    <button class="logout" onclick="logout()">Logout</button>
   </div>
 
   <!-- Container -->
@@ -19,7 +21,7 @@
     <!-- Stats Box -->
     <div class="stats">
       <h3>Total Registered Users</h3>
-      <p id="totalUsers">0</p>
+      <p id="totalUsers">Loading...</p>
     </div>
 
     <!-- User Table -->
@@ -29,9 +31,8 @@
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Joined</th>
+            <th>Username</th>
+            <th>Role</th>
           </tr>
         </thead>
         <tbody id="userTable">
@@ -42,5 +43,51 @@
 
   </div>
 
+  <!-- ================= SCRIPTS ================= -->
+  <script>
+    // 🔐 Logout
+    function logout() {
+      window.location.href = "/logout";
+    }
+
+    // 📊 Load total users
+    fetch("/admin/stats")
+      .then(res => {
+        if (!res.ok) throw new Error("Not authorized");
+        return res.json();
+      })
+      .then(data => {
+        document.getElementById("totalUsers").innerText = data.totalUsers;
+      })
+      .catch(() => {
+        document.getElementById("totalUsers").innerText = "Error";
+      });
+
+    // 👥 Load users list
+    fetch("/admin/users")
+      .then(res => {
+        if (!res.ok) throw new Error("Not authorized");
+        return res.json();
+      })
+      .then(users => {
+        const table = document.getElementById("userTable");
+        table.innerHTML = "";
+
+        users.forEach(u => {
+          table.innerHTML += `
+            <tr>
+              <td>${u.username}</td>
+              <td>${u.isAdmin ? "Admin" : "User"}</td>
+            </tr>
+          `;
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Users load nahi ho rahe. Login as admin.");
+      });
+  </script>
+
 </body>
 </html>
+
