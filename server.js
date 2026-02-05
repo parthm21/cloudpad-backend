@@ -21,6 +21,8 @@ const app = express();
 /* ================= MIDDLEWARE ================= */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Static files (CSS, JS, images)
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(
@@ -37,20 +39,27 @@ app.use(
   })
 );
 
+/* ================= BLOCK DIRECT HTML ACCESS ================= */
+app.use((req, res, next) => {
+  if (req.path.endsWith(".html") && !req.session.userId) {
+    return res.redirect("/login.html");
+  }
+  next();
+});
+
 /* ================= GUARDS ================= */
 function isLoggedIn(req, res, next) {
   if (!req.session.userId) {
-    return res.status(401).send("Not logged in");
+    return res.redirect("/login.html");
   }
   next();
 }
 
 function isAdmin(req, res, next) {
-  if (req.session.isAdmin) {
-    next();
-  } else {
-    res.status(403).send("Admin only");
+  if (req.session.isAdmin === true) {
+    return next();
   }
+  return res.status(403).send("Admin only");
 }
 
 /* ================= AUTH ================= */
@@ -67,11 +76,11 @@ app.post("/register", async (req, res) => {
       password: hash
     });
 
-    req.session.userId = user._id;
+    req.session.userId = user._id.toString();
     req.session.username = user.username;
-    req.session.isAdmin = user.isAdmin || false;
+    req.session.isAdmin = user.isAdmin === true;
 
-    res.redirect("/notepad.html");
+    res.redirect("/notepad");
   } catch (err) {
     console.error(err);
     res.status(500).send("Register error");
@@ -88,17 +97,14 @@ app.post("/login", async (req, res) => {
     const ok = await bcrypt.compare(password, user.password);
     if (!ok) return res.send("Wrong password");
 
-    // ✅ SESSION SET (SIMPLE & SAFE)
     req.session.userId = user._id.toString();
     req.session.username = user.username;
     req.session.isAdmin = user.isAdmin === true;
 
-    console.log("LOGIN SESSION:", req.session);
-
     if (req.session.isAdmin) {
-      res.redirect("/admin.html");
+      res.redirect("/admin");
     } else {
-      res.redirect("/notepad.html");
+      res.redirect("/notepad");
     }
   } catch (err) {
     console.error(err);
@@ -106,14 +112,29 @@ app.post("/login", async (req, res) => {
   }
 });
 
-
-/* ================= USER INFO ================= */
-app.get("/me", (req, res) => {
-  res.json({ username: req.session.username || "User" });
+/* ================= LOGOUT ================= */
+app.get("/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.clearCookie("cloudpad.sid");
+    res.redirect("/login.html");
+  });
 });
 
-app.get("/debug-session", (req, res) => {
-  res.json(req.session);
+/* ================= PROTECTED PAGES ================= */
+
+// User notepad
+app.get("/notepad", isLoggedIn, (req, res) => {
+  res.sendFile(path.join(__dirname, "public/notepad.html"));
+});
+
+// Admin dashboard
+app.get("/admin", isAdmin, (req, res) => {
+  res.sendFile(path.join(__dirname, "public/admin.html"));
+});
+
+/* ================= USER INFO ================= */
+app.get("/me", isLoggedIn, (req, res) => {
+  res.json({ username: req.session.username });
 });
 
 /* ================= NOTES ================= */
@@ -145,7 +166,7 @@ app.post("/save", isLoggedIn, async (req, res) => {
   res.send("saved");
 });
 
-/* ================= ADMIN ROUTES ================= */
+/* ================= ADMIN APIs ================= */
 app.get("/admin/users", isAdmin, async (req, res) => {
   const users = await User.find().select("-password");
   res.json(users);
@@ -154,6 +175,11 @@ app.get("/admin/users", isAdmin, async (req, res) => {
 app.get("/admin/stats", isAdmin, async (req, res) => {
   const totalUsers = await User.countDocuments();
   res.json({ totalUsers });
+});
+
+/* ================= DEBUG (OPTIONAL – REMOVE IN PROD) ================= */
+app.get("/debug-session", (req, res) => {
+  res.json(req.session);
 });
 
 /* ================= HOME ================= */
@@ -175,14 +201,5 @@ async function startServer() {
     console.error("Mongo connection failed:", err.message);
   }
 }
-
-app.get("/hash-admin", async (req, res) => {
-  const hash = await bcrypt.hash("admin123", 10);
-  await User.updateOne(
-    { username: "admin" },
-    { $set: { password: hash } }
-  );
-  res.send("Admin password hashed");
-});
 
 startServer();
