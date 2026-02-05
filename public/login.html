@@ -25,8 +25,11 @@ Built by <span>[Parth Madhoriya]</span>
 
     <div class="auth-box">
     <h2>Login</h2>
+     <!-- 🌙 SOFT ERROR BOX -->
+    <div id="loginError" class="error-box"></div>
      
-    <form method="POST" action="/login">
+   <form id="loginForm">
+
       <input type="text" name="username" placeholder="Username" required>
       <input type="password" name="password" placeholder="Password" required>
       <button type="submit">Login</button>
@@ -37,6 +40,56 @@ Built by <span>[Parth Madhoriya]</span>
     </p>
 
     <script src="/theme.js"></script>
+
+
+      <!-- 🌙 LOGIN SCRIPT -->
+<script>
+  const form = document.getElementById("loginForm");
+  const errorBox = document.getElementById("loginError");
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add("show");
+    setTimeout(() => {
+      errorBox.classList.remove("show");
+    }, 3000);
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    let res;
+    try {
+      res = await fetch("/login", {
+        method: "POST",
+        body: new URLSearchParams(new FormData(form))
+      });
+    } catch {
+      showError("⚠️ Network error. Try again.");
+      return;
+    }
+
+    // 🔥 IMPORTANT: always read as TEXT first
+    const text = await res.text();
+
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      showError("⚠️ Incorrect username or password.");
+      return;
+    }
+
+    if (!res.ok) {
+      showError(data.error || "⚠️ Incorrect username or password.");
+      return;
+    }
+
+    // ✅ SUCCESS
+    window.location.href = data.isAdmin ? "/admin" : "/notepad";
+  });
+</script>
+
 
   </div>
 

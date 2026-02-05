@@ -22,7 +22,11 @@ Built by <span>[Parth Madhoriya]</span>
 
   <div class="auth-box">
     <h2>Register</h2>
-    <form action="/register" method="POST">
+    
+    <!-- 🌙 SOFT ERROR BOX -->
+    <div id="registerError" class="error-box"></div>
+
+   <form id="registerForm">
       <input name="username" placeholder="Username" required>
       <input name="password" type="password" placeholder="Password" required>
       <button type="submit">Register</button>
@@ -32,6 +36,58 @@ Built by <span>[Parth Madhoriya]</span>
     <script src="/theme.js"></script>
 
     <p>Already have an account? <a href="/login.html">Login</a></p>
+
+
+
+      <!-- 🌙 REGISTER SCRIPT -->
+<script>
+  const form = document.getElementById("registerForm");
+  const errorBox = document.getElementById("registerError");
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add("show");
+    setTimeout(() => {
+      errorBox.classList.remove("show");
+    }, 3000);
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    let res;
+    try {
+      res = await fetch("/register", {
+        method: "POST",
+        body: new URLSearchParams(new FormData(form))
+      });
+    } catch {
+      showError("⚠️ Network error. Try again.");
+      return;
+    }
+
+    // 🔥 IMPORTANT: always read as TEXT first
+    const text = await res.text();
+
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      showError("⚠️ Username already exists.");
+      return;
+    }
+
+    if (!res.ok) {
+      showError(data.error || "⚠️ Registration failed.");
+      return;
+    }
+
+    // ✅ SUCCESS (already logged in)
+    window.location.href = "/notepad";
+  });
+</script>
+
+
   </div>
 
 </body>

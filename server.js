@@ -68,49 +68,68 @@ app.post("/register", async (req, res) => {
     const { username, password } = req.body;
 
     const exists = await User.findOne({ username });
-    if (exists) return res.send("User already exists");
+    if (exists) {
+      return res.status(400).json({
+        error: "User already exists"
+      });
+    }
 
     const hash = await bcrypt.hash(password, 10);
+
     const user = await User.create({
       username,
       password: hash
     });
 
+    // ✅ VERY IMPORTANT (SESSION SET)
     req.session.userId = user._id.toString();
     req.session.username = user.username;
     req.session.isAdmin = user.isAdmin === true;
 
-    res.redirect("/notepad");
+    // ✅ success
+    return res.json({
+      success: true
+    });
+
   } catch (err) {
     console.error(err);
-    res.status(500).send("Register error");
+    return res.status(500).json({
+      error: "Register error"
+    });
   }
 });
+
 
 app.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
 
     const user = await User.findOne({ username });
-    if (!user) return res.send("Invalid user");
+    if (!user) {
+      return res.status(400).json({ error: "Invalid user" });
+    }
 
     const ok = await bcrypt.compare(password, user.password);
-    if (!ok) return res.send("Wrong password");
+    if (!ok) {
+      return res.status(400).json({ error: "Wrong password" });
+    }
 
+    // ✅ SESSION SET (THIS WAS MISSING / WRONG)
     req.session.userId = user._id.toString();
-    req.session.username = user.username;
+    req.session.username = user.username;   // 🔥 THIS LINE
     req.session.isAdmin = user.isAdmin === true;
 
-    if (req.session.isAdmin) {
-      res.redirect("/admin");
-    } else {
-      res.redirect("/notepad");
-    }
+    return res.json({
+      success: true,
+      isAdmin: req.session.isAdmin
+    });
+
   } catch (err) {
     console.error(err);
-    res.status(500).send("Login error");
+    return res.status(500).json({ error: "Login error" });
   }
 });
+
 
 /* ================= LOGOUT ================= */
 app.get("/logout", (req, res) => {
