@@ -1,14 +1,14 @@
 {
-  "name": "",
+  "name": "cloudpad-backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "parth",
   "license": "ISC",
-  "description": "",
+  "description": "CloudPad backend server",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "dotenv": "^17.2.3",
@@ -19,3 +19,4 @@
     "sqlite3": "^5.1.7"
   }
 }
+
