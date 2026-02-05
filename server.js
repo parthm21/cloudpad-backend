@@ -1,11 +1,13 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const session = require("express-session");
-const bcrypt = require("bcrypt");
+import dotenv from "dotenv";
+dotenv.config();
 
-const User = require("./models/User");
-const Note = require("./models/Note");
+import express from "express";
+import session from "express-session";
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+
+import User from "./models/User.js";
+import Note from "./models/Note.js";
 
 const app = express();
 
@@ -120,6 +122,12 @@ app.post("/save", isLoggedIn, async (req, res) => {
 
   res.send("saved");
 });
+
+
+app.get("/", (req, res) => {
+  res.send("CloudPad backend is LIVE 🚀");
+});
+
 
 /* ================= DATABASE + START ================= */
 async function startServer() {
