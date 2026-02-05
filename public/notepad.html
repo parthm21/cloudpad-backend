@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Notepad</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="mobile.css">
+  <link rel="icon" href="/favicon.ico">
+
+</head>
+
+<body>
+  
+
+
+  <div class="app-wrapper">
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+     <h2 class="pro-glow">CloudPad</h2>
+
+      <span class="clock" id="clock">--</span>
+    </div>
+
+    <!-- MENU BAR -->
+    <div class="menu-bar">
+      <div class="menu-left">
+      
+        <span class="app-title" id="appTitle">Loading...</span>
+      </div>
+
+      <div class="menu-right">
+  <!-- THEME SWITCHER WITH EMOJIS -->
+  <div class="theme-switcher small emoji">
+    <button data-theme="dark" title="Dark">🌙</button>
+    <button data-theme="pink" title="Pink">🌸</button>
+  </div>
+
+
+        <span class="status saved" id="saveStatus">✔ Saved</span>
+       
+      </div>
+    </div>
+
+    <!-- EDITOR -->
+    <div class="editor">
+      <textarea id="note" placeholder="Start typing..."></textarea>
+    </div>
+
+  </div>
+
+
+  
+
+  <!-- LOGOUT -->
+  <button class="logout-btn" id="logoutBtn">Logout</button>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+
+   <script src="/theme.js"></script>
+
+</body>
+</html>

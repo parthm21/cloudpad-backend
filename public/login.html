@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- MUST -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Login</title>
+
+  <!-- CSS path ROOT se -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="mobile.css">
+
+</head>
+<body>
+  <div class="auth-header">
+  <h1>CLOUDPAD</h1>
+  <p>Your Personal Accessible Notepad</p>
+</div>
+
+  <div class="corner-name">
+Built by <span>[Parth Madhoriya]</span>
+</div>
+
+    <div class="auth-box">
+    <h2>Login</h2>
+     
+    <form method="POST" action="/login">
+      <input type="text" name="username" placeholder="Username" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <p class="link">
+      New user? <a href="/register.html">Register</a>
+    </p>
+
+    <script src="/theme.js"></script>
+
+  </div>
+
+</body>
+</html>

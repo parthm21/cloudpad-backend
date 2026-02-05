@@ -1,0 +1,422 @@
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Consolas, "Courier New", monospace;
+}
+
+/* ===== BODY ===== */
+body {
+  background: #0b0f1a;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #e5e7eb;
+}
+
+/* ===== APP WRAPPER ===== */
+.app-wrapper {
+  width: 1000px;
+  max-width: 95vw;
+  height: 85vh;
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+}
+
+/* ===== TOP BAR ===== */
+.top-bar {
+  height: 42px;
+  background: #020617;
+  border-bottom: 1px solid #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  font-size: 14px;
+}
+
+.app-title {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.clock {
+  opacity: 0.8;
+}
+
+/* ===== MENU BAR ===== */
+.menu-bar {
+  background: #020617;
+  border-bottom: 1px solid #1e293b;
+  padding: 6px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-left span {
+  margin-right: 16px;
+  font-size: 14px;
+}
+
+/* ===== MENU RIGHT ===== */
+.menu-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  padding: 4px 10px;
+  font-size: 13px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn.new {
+  background: #0ea5e9;
+  color: #fff;
+}
+
+
+.filename {
+  font-size: 13px;
+}
+
+
+/* ===== EDITOR ===== */
+.editor {
+  flex: 1;
+  padding: 20px;
+}
+
+.editor textarea {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  color: #e5e7eb;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ===== LOGOUT BUTTON ===== */
+.logout-btn {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  background: #dc2626;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.logout-btn:hover {
+  background: #b91c1c;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .app-wrapper {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+}
+
+body.app-page {
+  background: #0b0f1a;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* AUTH PAGE BODY */
+body.auth-page {
+  background: #0b0f1a;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* ===============================
+   AUTH PAGES (LOGIN / REGISTER)
+=============================== */
+.auth-box {
+  width: 380px;
+  max-width: 90vw;
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  color: #e5e7eb;
+}
+
+
+/* Heading */
+.auth-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Inputs */
+.auth-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 14px;
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 6px;
+  color: #e5e7eb;
+  font-size: 14px;
+}
+
+.auth-box input::placeholder {
+  color: #94a3b8;
+}
+
+/* Button */
+.auth-box button {
+  width: 100%;
+  padding: 10px;
+  background: #22c55e;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.auth-box button:hover {
+  background: #16a34a;
+}
+
+/* Links */
+.auth-box p {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.auth-box a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+/* ===== AUTO SAVE INDICATOR ===== */
+.status {
+  font-size: 13px;
+  padding: 2px 6px;
+}
+
+.status.saved {
+  color: #22c55e; /* green */
+}
+
+.status.unsaved {
+  color: #facc15; /* yellow */
+}
+#saveBtn {
+  display: none;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  color: #e5e7eb;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px 8px;
+}
+
+.menu-btn:hover {
+  background: #1e293b;
+}
+
+.statusBar {
+  height: 26px;
+  font-size: 12px;
+  color: #94a3b8;
+  padding: 4px 12px;
+  border-top: 1px solid #1e293b;
+
+  display: flex;
+  justify-content: flex-end;   /* RIGHT */
+  align-items: center;
+}
+/* ===============================
+   AUTH HEADER (CLOUDPAD)
+================================ */
+.auth-header {
+  position: absolute;
+  top: 80px;
+  text-align: center;
+  color: #e5e7eb;
+}
+
+.auth-header h1 {
+  font-size: 70px;
+  letter-spacing: 10px;
+  margin-bottom: 8px;
+}
+
+.auth-header p {
+  font-size: 14px;
+  color: #94a3b8;
+}
+/* ===============================
+   BOTTOM RIGHT NAME (FORCED)
+================================ */
+.corner-name {
+  position: fixed;
+  right: 20px;
+  bottom: 16px;
+  font-size: 12px;
+  color: #94a3b8;
+  letter-spacing: 0.6px;
+  z-index: 9999;          /* 👈 THIS IS THE KEY */
+  pointer-events: none;  /* click interfere na kare */
+}
+/* ===============================
+   AUTH ERROR MESSAGE
+================================ */
+.auth-error {
+  display: none;
+  background: #7f1d1d;
+  border: 1px solid #dc2626;
+  color: #fee2e2;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.auth-error.show {
+  display: block;
+}
+/* ===============================
+   THEME SWITCHER – EMOJI STYLE
+================================ */
+.theme-switcher.emoji button {
+  width: auto;
+  height: auto;
+  padding: 2px 4px;
+  font-size: 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.theme-switcher.emoji button:hover {
+  transform: scale(1.2);
+}
+
+body.theme-dark {
+  background: #0b0f1a;
+}
+
+
+/* ===============================
+   SAKURA PETALS (LIGHT EFFECT)
+================================ */
+body.theme-pink::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255, 182, 193, 0.4), transparent 30%),
+    radial-gradient(circle at 80% 30%, rgba(255, 140, 170, 0.35), transparent 35%),
+    radial-gradient(circle at 50% 70%, rgba(255, 200, 215, 0.3), transparent 40%);
+
+  animation: sakuraFloat 20s linear infinite;
+}
+
+@keyframes sakuraFloat {
+  from {
+    transform: translateY(-10px);
+  }
+  to {
+    transform: translateY(20px);
+  }
+}
+.petals {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.petals span {
+  position: absolute;
+  top: -10%;
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 182, 193, 0.6);
+  border-radius: 60% 40% 60% 40%;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+/* ===============================
+   UNIVERSAL MOON – DESKTOP + PHONE
+================================ */
+body.theme-dark {
+  background:
+    radial-gradient(
+      circle at 88% 14%,
+      rgba(255, 255, 255, 0.14),
+      rgba(255, 255, 255, 0.07) 32%,
+      transparent 58%
+    ),
+    linear-gradient(
+      180deg,
+      #0b0f1a 0%,
+      #020617 100%
+    );
+}
+
+/* app box should not hide moon */
+body.theme-dark .app-wrapper {
+  background: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+/* clean glassy top bar */
+body.theme-dark .top-bar {
+  background: transparent;
+}

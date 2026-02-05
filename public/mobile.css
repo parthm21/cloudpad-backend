@@ -1,0 +1,370 @@
+/* ===============================
+   MOBILE OVERRIDES ONLY
+================================ */
+@media (max-width: 768px) {
+
+  /* BODY FIX */
+  body {
+    display: block;
+    height: auto;
+    overflow: hidden;
+  }
+
+  /* APP WRAPPER */
+  .app-wrapper {
+    width: 100%;
+    height: 100vh;
+    max-width: 100%;
+    border-radius: 0;
+  }
+
+  /* ===============================
+     TOP BAR
+  ================================ */
+  .top-bar {
+    height: auto;
+    padding: 8px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .app-title {
+    font-size: 14px;
+  }
+
+  .clock {
+    font-size: 12px;
+  }
+
+  /* ===============================
+     MENU BAR
+  ================================ */
+  .menu-bar {
+    padding: 6px 10px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .menu-left,
+  .menu-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .menu-btn {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .status {
+    font-size: 12px;
+  }
+
+  /* ===============================
+     EDITOR
+  ================================ */
+  .editor {
+    flex: 1;
+    padding: 10px;
+  }
+
+  .editor textarea {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  /* ===============================
+     LOGOUT BUTTON
+  ================================ */
+  .logout-btn {
+    right: 12px;
+    bottom: 12px;
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  /* ===============================
+     AUTH PAGES
+  ================================ */
+  .auth-box {
+    width: 100%;
+    margin: 0 12px;
+    padding: 24px;
+  }
+
+  .auth-header h1 {
+    font-size: 42px;
+    letter-spacing: 6px;
+  }
+
+  .auth-header {
+    top: 40px;
+  }
+
+}
+/* ===============================
+   MOBILE LOGIN – ABSOLUTE FINAL
+================================ */
+@media (max-width: 768px) {
+
+  /* BODY */
+  body.auth-page {
+    min-height: 100vh;
+    position: relative;
+    padding: 0;
+  }
+
+  /* CLOUDPAD HEADER (TOP) */
+  .auth-header {
+    position: relative;
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  .auth-header h1 {
+    font-size: 42px;
+    letter-spacing: 6px;
+  }
+
+  .auth-header p {
+    font-size: 13px;
+    margin-top: 4px;
+    color: #94a3b8;
+  }
+
+  /* LOGIN PORTAL – TRUE CENTER */
+  .auth-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 360px;
+  }
+
+  /* BUILD BY (BOTTOM – 2 LINES) */
+  .corner-name {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 12px;
+    color: #94a3b8;
+    line-height: 1.4;
+  }
+
+  .corner-name span {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #e5e7eb;
+  }
+
+}
+/* ===============================
+   MOBILE – CLOCK RIGHT ALIGN
+================================ */
+@media (max-width: 768px) {
+
+  .top-bar {
+    flex-direction: row;          /* column hata */
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .app-title {
+    font-size: 14px;
+  }
+
+  .clock {
+    font-size: 12px;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+}
+@media (max-width: 768px) {
+  body.theme-dark {
+    background:
+      radial-gradient(circle at 85% 15%, rgba(255,255,255,0.05), transparent 35%),
+      linear-gradient(180deg, #0b0f1a 0%, #020617 100%);
+  }
+}
+/* ===============================
+
+/* ===============================
+   MOBILE – LOGOUT BUTTON FIX
+================================ */
+@media (max-width: 768px) {
+
+  .logout-btn {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+
+    padding: 10px 16px;
+    font-size: 14px;
+
+    z-index: 9999;          /* 👈 MOST IMPORTANT */
+    display: block;
+  }
+
+}
+/* ===============================
+   MOBILE – REMOVE MOON ONLY
+================================ */
+@media (max-width: 768px) {
+
+  /* DARK THEME – NO MOON */
+  body.theme-dark {
+    background: #020617;   /* simple clean dark */
+  }
+
+  /* remove moon glow layer */
+  body.theme-dark::before,
+  body.theme-dark::after {
+    display: none !important;
+  }
+}
+@media (max-width: 768px) {
+  body.theme-dark::before {
+    width: 90px;
+    height: 90px;
+    top: 4%;
+    right: 4%;
+    opacity: 0.75;   /* very soft */
+  }
+}
+/* ===============================
+   MOBILE – DESKTOP LIKE TEXT
+================================ */
+@media (max-width: 768px) {
+
+  /* SAME FONT AS DESKTOP */
+  * {
+    font-family: Consolas, "Courier New", monospace !important;
+  }
+
+  /* EDITOR TEXT */
+  .editor textarea {
+    font-size: 15px !important;      /* same as desktop */
+    line-height: 1.6 !important;     /* same spacing */
+    font-weight: 400 !important;
+    letter-spacing: 0.2px;
+  }
+
+  /* TITLE / TOP TEXT */
+  .app-title {
+    font-size: 15px !important;
+    font-weight: 600;
+  }
+
+  /* STATUS / MENU TEXT */
+  .menu-btn,
+  .status,
+  .clock {
+    font-size: 13px !important;
+    font-weight: 400;
+  }
+}
+/* ===============================
+   MOBILE FINAL CSS – MOON THEME
+================================ */
+@media (max-width: 768px) {
+
+  /* ===== BODY ===== */
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ===== DARK THEME BACKGROUND (KEEP DARK) ===== */
+  body.theme-dark {
+    background:
+      radial-gradient(
+        circle at 88% 14%,
+        rgba(255, 255, 255, 0.14),
+        rgba(255, 255, 255, 0.07) 32%,
+        transparent 58%
+      ),
+      linear-gradient(
+        180deg,
+        #0b0f1a 0%,
+        #020617 100%
+      );
+  }
+
+  /* ===== APP WRAPPER ===== */
+  .app-wrapper {
+    width: 100%;
+    height: 100vh;
+    max-width: 100%;
+    border-radius: 0;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== TOP BAR ===== */
+  .top-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+  }
+
+  .app-title {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .clock {
+    font-size: 12px;
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  /* ===== MENU BAR ===== */
+  .menu-bar {
+    padding: 6px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .menu-btn {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .status {
+    font-size: 12px;
+  }
+
+  /* ===== EDITOR ===== */
+  .editor {
+    flex: 1;
+    padding: 10px;
+  }
+
+  .editor textarea {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ===== LOGOUT BUTTON ===== */
+  .logout-btn {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    padding: 10px 16px;
+    font-size: 14px;
+    z-index: 9999;
+  }
+}
