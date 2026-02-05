@@ -12,6 +12,7 @@ import { fileURLToPath } from "url";
 import User from "./models/User.js";
 import Note from "./models/Note.js";
 
+/* ================= SETUP ================= */
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -36,12 +37,20 @@ app.use(
   })
 );
 
-/* ================= AUTH GUARD ================= */
+/* ================= GUARDS ================= */
 function isLoggedIn(req, res, next) {
   if (!req.session.userId) {
     return res.status(401).send("Not logged in");
   }
   next();
+}
+
+function isAdmin(req, res, next) {
+  if (req.session.isAdmin) {
+    next();
+  } else {
+    res.status(403).send("Admin only");
+  }
 }
 
 /* ================= AUTH ================= */
@@ -53,10 +62,14 @@ app.post("/register", async (req, res) => {
     if (exists) return res.send("User already exists");
 
     const hash = await bcrypt.hash(password, 10);
-    const user = await User.create({ username, password: hash });
+    const user = await User.create({
+      username,
+      password: hash
+    });
 
     req.session.userId = user._id;
     req.session.username = user.username;
+    req.session.isAdmin = user.isAdmin || false;
 
     res.redirect("/notepad.html");
   } catch (err) {
@@ -80,7 +93,13 @@ app.post("/login", async (req, res) => {
 
       req.session.userId = user._id;
       req.session.username = user.username;
-      res.redirect("/notepad.html");
+      req.session.isAdmin = user.isAdmin || false;
+
+      if (user.isAdmin) {
+        res.redirect("/admin.html");
+      } else {
+        res.redirect("/notepad.html");
+      }
     });
   } catch (err) {
     console.error(err);
@@ -129,11 +148,21 @@ app.post("/save", isLoggedIn, async (req, res) => {
   res.send("saved");
 });
 
+/* ================= ADMIN ROUTES ================= */
+app.get("/admin/users", isAdmin, async (req, res) => {
+  const users = await User.find().select("-password");
+  res.json(users);
+});
 
+app.get("/admin/stats", isAdmin, async (req, res) => {
+  const totalUsers = await User.countDocuments();
+  res.json({ totalUsers });
+});
+
+/* ================= HOME ================= */
 app.get("/", (req, res) => {
   res.send("CloudPad backend is LIVE 🚀");
 });
-
 
 /* ================= DATABASE + START ================= */
 async function startServer() {
