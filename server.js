@@ -6,8 +6,14 @@ import session from "express-session";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
+import path from "path";
+import { fileURLToPath } from "url";
+
 import User from "./models/User.js";
 import Note from "./models/Note.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
