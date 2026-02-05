@@ -1,0 +1,47 @@
+/* ===== ADMIN MOBILE CSS ===== */
+@media (max-width: 768px) {
+
+  body {
+    font-size: 14px;
+  }
+
+  /* Topbar */
+  .topbar {
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .logout {
+    align-self: flex-end;
+  }
+
+  /* Container */
+  .container {
+    padding: 12px;
+  }
+
+  /* Stats box */
+  .stats {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .stats p {
+    font-size: 22px;
+  }
+
+  /* Table */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  th, td {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+}
