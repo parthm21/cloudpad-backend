@@ -460,3 +460,45 @@ body.theme-dark .top-bar {
   text-decoration: underline;
   opacity: 0.9;
 }
+/* ===== VIEW PORTFOLIO ABOVE NAME ===== */
+
+.portfolio-link {
+  position: relative; /* anchor ko reference bana rahe */
+}
+
+/* hidden text */
+.portfolio-link .hover-text {
+  position: absolute;
+  bottom: 180%;              /* 🔥 NAAM KE UPAR */
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+  z-index: 999999;
+}
+
+/* small arrow */
+.portfolio-link .hover-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(0, 0, 0, 0.85);
+}
+
+/* show on hover */
+.portfolio-link:hover .hover-text {
+  opacity: 1;
+  visibility: visible;
+}
