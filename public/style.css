@@ -469,7 +469,7 @@ body.theme-dark .top-bar {
 /* hidden text */
 .portfolio-link .hover-text {
   position: absolute;
-  bottom: 180%;              /* 🔥 NAAM KE UPAR */
+  bottom: 160%;              /* 🔥 NAAM KE UPAR */
   left: 50%;
   transform: translateX(-50%);
 
