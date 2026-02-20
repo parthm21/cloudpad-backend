@@ -441,3 +441,35 @@ body.theme-dark .top-bar {
   from { opacity: 0; transform: translateY(-4px); }
   to { opacity: 1; transform: translateY(0); }
 }
+/* ===== BUILT BY NAME – CLICK FIX (FINAL) ===== */
+.corner-name {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 99999;           /* 🔥 sabse upar */
+  
+  font-size: 13px;
+  color: #9ca3af;
+  background: rgba(0,0,0,0.45);
+  padding: 6px 10px;
+  border-radius: 8px;
+
+  pointer-events: auto;    /* 🔥 click enable */
+}
+
+/* LINK */
+.portfolio-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+
+  pointer-events: auto;    /* 🔥 force click */
+  position: relative;
+  z-index: 100000;         /* 🔥 parent se bhi upar */
+}
+
+.portfolio-link:hover {
+  text-decoration: underline;
+  opacity: 0.9;
+}
