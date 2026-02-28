@@ -160,7 +160,10 @@ function renderNotes() {
     `;
 
     // OPEN
-   titleSpan.addEventListener("click", () => {
+ div.addEventListener("click", (e) => {
+
+  // agar delete button pe click hua to open na kare
+  if (e.target.closest(".delete-btn")) return;
 
   const selected = allNotes.find(n => n._id === noteObj._id);
   if (!selected) return;
