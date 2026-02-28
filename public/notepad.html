@@ -21,6 +21,8 @@
     <div class="top-bar">
      <h2 class="pro-glow">CloudPad</h2>
 
+
+     
       <span class="clock" id="clock">--</span>
     </div>
 
@@ -29,9 +31,11 @@
       <div class="menu-left">
       
         <span class="app-title" id="appTitle">Loading...</span>
+       
       </div>
 
       <div class="menu-right">
+        
   <!-- THEME SWITCHER WITH EMOJIS -->
   <div class="theme-switcher small emoji">
     <button data-theme="dark" title="Dark">🌙</button>
@@ -39,9 +43,28 @@
   </div>
 
 
-        <span class="status saved" id="saveStatus">✔ Saved</span>
        
+        <div class="notes-manager">
+  <button id="notesBtn" class="notes-btn">Notes ▾</button>
+
+  <div id="notesDropdown" class="notes-dropdown">
+
+    <!-- Add Note -->
+    <div class="dropdown-add">
+      <input type="text" id="newNoteName" placeholder="Enter note name..." />
+      <button id="createNoteBtn">➕</button>
+    </div>
+
+    <!-- Notes List -->
+    <div id="notesList"></div>
+
+  </div>
+ 
+</div>
+       
+     <span class="status saved" id="saveStatus">✔</span>
       </div>
+      
     </div>
 
     <!-- EDITOR -->

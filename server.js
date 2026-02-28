@@ -165,12 +165,20 @@ app.get("/notes", isLoggedIn, async (req, res) => {
 });
 
 app.post("/notes/new", isLoggedIn, async (req, res) => {
-  const note = await Note.create({
-    userId: req.session.userId,
-    title: "Untitled",
-    content: ""
-  });
-  res.json(note);
+  try {
+    const { title } = req.body;
+
+    const note = await Note.create({
+      userId: req.session.userId,
+      title: title && title.trim() !== "" ? title : "Untitled",
+      content: ""
+    });
+
+    res.json(note);
+  } catch (err) {
+    console.error("Create note error:", err);
+    res.status(500).json({ error: "Create failed" });
+  }
 });
 
 app.post("/save", isLoggedIn, async (req, res) => {
@@ -220,5 +228,38 @@ async function startServer() {
     console.error("Mongo connection failed:", err.message);
   }
 }
+/* ================= DELETE NOTE ================= */
+app.delete("/notes/:id", isLoggedIn, async (req, res) => {
+  try {
+    const noteId = req.params.id;
+
+    await Note.deleteOne({
+      _id: noteId,
+      userId: req.session.userId
+    });
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Delete error:", err);
+    res.status(500).json({ error: "Delete failed" });
+  }
+});
+
+/* ================= RENAME NOTE ================= */
+app.put("/notes/:id", isLoggedIn, async (req, res) => {
+  try {
+    const { title } = req.body;
+
+    await Note.updateOne(
+      { _id: req.params.id, userId: req.session.userId },
+      { title: title || "Untitled" }
+    );
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Rename error:", err);
+    res.status(500).json({ error: "Rename failed" });
+  }
+});
 
 startServer();

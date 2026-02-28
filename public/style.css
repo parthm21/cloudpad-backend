@@ -223,7 +223,7 @@ body.auth-page {
 
 /* ===== AUTO SAVE INDICATOR ===== */
 .status {
-  font-size: 13px;
+  font-size: 16px;
   padding: 2px 6px;
 }
 
@@ -316,10 +316,6 @@ body.auth-page {
 
 .theme-switcher.emoji button:hover {
   transform: scale(1.2);
-}
-
-body.theme-dark {
-  background: #0b0f1a;
 }
 
 
@@ -462,9 +458,7 @@ body.theme-dark .top-bar {
 }
 /* ===== VIEW PORTFOLIO ABOVE NAME ===== */
 
-.portfolio-link {
-  position: relative; /* anchor ko reference bana rahe */
-}
+
 
 /* hidden text */
 .portfolio-link .hover-text {
@@ -501,4 +495,175 @@ body.theme-dark .top-bar {
 .portfolio-link:hover .hover-text {
   opacity: 1;
   visibility: visible;
+}
+/* ===== NOTES MANAGER ===== */
+.notes-manager {
+  position: relative;
+}
+
+/* ===== NOTES BUTTON (Dark Blue Match) ===== */
+.notes-btn {
+  background: #0f172a;              /* match dark */
+  color: #e5e7eb;
+  border: 1px solid #1e293b;
+  padding: 2px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.notes-btn::before {
+  content: "📁";                    /* file icon */
+}
+
+.notes-btn:hover {
+  background: #1e293b;
+}
+
+
+/* =========================
+   DROPDOWN BOX (FIXED SIZE)
+========================= */
+.notes-dropdown {
+  position: absolute;
+  top: 38px;               /* button ke neeche */
+  right: 0;
+
+  width: 230px;            /* balanced width */
+  max-height: 260px;       /* height limit */
+  overflow-y: auto;
+
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 10px;
+
+  display: none;
+  z-index: 999;
+}
+
+.notes-dropdown.show {
+  display: block;
+}
+
+/* =========================
+   ADD SECTION
+========================= */
+.dropdown-add {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.dropdown-add input {
+  flex: 1;
+  padding: 5px 6px;
+  font-size: 12px;
+  border-radius: 6px;
+  border: 1px solid #1e293b;
+  background: #0b0f1a;
+  color: #e5e7eb;
+}
+
+/* PLUS BUTTON */
+#createNoteBtn {
+  background: #eab308;
+  color: #000;
+  border: none;
+  padding: 5px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#createNoteBtn:hover {
+  background: #ca8a04;
+}
+
+/* =========================
+   NOTE ITEMS
+========================= */
+.note-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.note-item:hover {
+  background: #1e293b;
+}
+
+/* DELETE BIN */
+.delete-btn {
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.delete-btn:hover {
+  color: #dc2626;
+}
+/* PREMIUM TRASH BUTTON */
+.trash-wrap {
+  width: 28px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
+  background: rgba(239, 68, 68, 0.08);
+  backdrop-filter: blur(6px);
+
+  transition: all 0.25s ease;
+}
+
+.trash-icon {
+  width: 18px;
+  height: 18px;
+  fill: #ef4444;
+  transition: all 0.25s ease;
+}
+
+/* Hover effect */
+.delete-btn:hover .trash-wrap {
+  background: rgba(239, 68, 68, 0.18);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+}
+
+.delete-btn:hover .trash-icon {
+  fill: #ff3b3b;
+  transform: scale(1.15);
+  animation: shake 0.3s ease;
+}
+
+
+@keyframes shake {
+  0% { transform: rotate(0); }
+  25% { transform: rotate(-8deg); }
+  50% { transform: rotate(8deg); }
+  75% { transform: rotate(-6deg); }
+  100% { transform: rotate(0); }
+}
+.rename-input {
+  width: 100%;
+  background: #0f172a;
+  border: 1px solid #475569;
+  color: #e5e7eb;
+  padding: 4px 6px;
+  font-size: 13px;
+  border-radius: 4px;
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+.rename-input:focus {
+  border-color: #3b82f6;
 }
