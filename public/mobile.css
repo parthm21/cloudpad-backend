@@ -104,66 +104,7 @@
   }
 
 }
-/* ===============================
-   MOBILE LOGIN – ABSOLUTE FINAL
-================================ */
-@media (max-width: 768px) {
 
-  /* BODY */
-  body.auth-page {
-    min-height: 100vh;
-    position: relative;
-    padding: 0;
-  }
-
-  /* CLOUDPAD HEADER (TOP) */
-  .auth-header {
-    position: relative;
-    margin-top: 40px;
-    text-align: center;
-  }
-
-  .auth-header h1 {
-    font-size: 42px;
-    letter-spacing: 6px;
-  }
-
-  .auth-header p {
-    font-size: 13px;
-    margin-top: 4px;
-    color: #94a3b8;
-  }
-
-  /* LOGIN PORTAL – TRUE CENTER */
-  .auth-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 360px;
-  }
-
-  /* BUILD BY (BOTTOM – 2 LINES) */
-  .corner-name {
-    position: fixed;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    font-size: 12px;
-    color: #94a3b8;
-    line-height: 1.4;
-  }
-
-  .corner-name span {
-    display: block;
-    font-size: 13px;
-    font-weight: 500;
-    color: #e5e7eb;
-  }
-
-}
 /* ===============================
    MOBILE – CLOCK RIGHT ALIGN
 ================================ */
@@ -367,4 +308,49 @@
     font-size: 14px;
     z-index: 9999;
   }
+}
+/* ===============================
+   MOBILE AUTH PERFECT CENTER FIX
+================================ */
+@media (max-width: 768px) {
+
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  body.auth-page {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-height: 100vh;
+  }
+
+  .auth-header {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .auth-box {
+    position: relative !important;
+    transform: none !important;
+    top: auto !important;
+    left: auto !important;
+
+    width: 90%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .corner-name {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+
 }
